@@ -113,7 +113,20 @@ Modify the `init` function to add the following model-level validations to the
     `'y'`. The error should indicate `name must not end in 'y'`, or similar.
   
 > Hint: In order to add additional validations, a `validate` key will need to be 
-> added to the `name` object.
+> added to the `name` object. Take a look at the 
+> [Sequelize validation docs][validate-docs] for more examples of built-in and 
+> custom validators.
+
+An example implementation of the custom function is given below. It is up to you 
+to determine how best to incorporate this function into your validations:
+
+```js
+function noEndingInY(value) {
+  if(value.slice(-1) === 'y') {
+    throw new Error('name must not end in \'y\'');
+  }
+}
+```
 
 When these validations have been created, run the test file again with 
 `npm test`. These validations should now prevent the third and fourth test cases 
@@ -136,3 +149,6 @@ errors when the model is used to create them?
 
 You are now able to generate **Sequelize** models and migrations, as well as 
 implement database constraints and model-level validations.
+
+
+[validate-docs]: https://sequelize.org/master/manual/validations-and-constraints.html#validators
